@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <link type="text/css" href="styles.css" />
+    <link rel="icon" href="/images/paw.png" type=“image/x-icon” />
+    <title>Ps</title>
+  </head>
+  <body>
+    <h1>Admin</h1>
+
+    <script>
+      async function getData() {
+        const response = await fetch("/api");
+        const data = await response.json();
+        console.log(data);
+
+        for (item of data) {
+          const root = document.createElement("div");
+
+          const petName = document.createElement("div");
+          petName.textContent = ` name: ${item.name}`;
+          const petStatus = document.createElement("div");
+          petStatus.textContent = ` status: ${item.status}`;
+          const petID = document.createElement("div");
+          petID.textContent = ` status: ${item.id}`;
+
+          root.append(petID, petName, petStatus);
+          document.body.append(root);
+        }
+      }
+      getData();
+    </script>
+  </body>
+</html>
