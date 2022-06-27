@@ -17,14 +17,14 @@ const userDatabase = new Datastore("user_database.db");
 
 database.loadDatabase();
 userDatabase.loadDatabase();
-//database.insert({ name: "Gumersindo", id: 1, status: "sold" });
+
 var path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
 app.listen(3000, () => console.log("listening at 3000"));
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
 
-app.get("/api", (request, response) => {
+app.get("/pet_api", (request, response) => {
   database.find({}, (err, data) => {
     if (err) {
       response.end();
@@ -34,7 +34,7 @@ app.get("/api", (request, response) => {
   });
 });
 
-app.post("/api", (request, response) => {
+app.post("/pet_api", async (request, response) => {
   const data = request.body;
   database.insert(data);
   response.json(data);

@@ -20,7 +20,7 @@ async function getInfo() {
     var message = (document.getElementById("logHelp").textContent =
       "Succesfully logged in!");
     logUser(username);
-    //window.location.href = "index.html";
+    window.location.href = "index.html";
   } else if (response.status == 500) {
     var message = (document.getElementById("logHelp").textContent =
       "Wrong Password");

@@ -10,19 +10,17 @@
 
 // ISS EXAMPLE
 
-const url = "https://petstore.swagger.io/v2/";
-
 async function getAvailablePets() {
-  const response = await fetch(url + "pet/findByStatus?status=available");
+  const response = await fetch("/pet_api");
   const data = await response.json();
 
-  let id = data[0]["id"];
   let name = data[0]["name"];
   let status = data[0]["status"];
+  let picture = data[0]["photoUrls"][0];
 
-  document.querySelector(".petsName").textContent = `name: ${name}`;
-  document.querySelector(".petsId").textContent = `id: ${id}`;
-  document.querySelector(".petsStatus").textContent = `status: ${status}`;
+  document.querySelector(".petsName").textContent = `${name}`;
+  document.querySelector(".petsStatus").textContent = `${status}`;
+  document.querySelector("#picture").src = picture;
 
   const options = {
     method: "POST",

@@ -44,19 +44,35 @@
         </div>
 
         <div class="navbar-nav">
-          <a class="nav-item nav-link" href="#">Catalog</a>
+          <a class="nav-item nav-link" href="index.html">Catalog</a>
           <a class="nav-item nav-link" href="#">Store</a>
-          <a class="nav-item nav-link" href="#">About</a>
+          <a class="nav-item nav-link" href="addPet.html">Add&nbspPet</a>
+          <a class="nav-item nav-link" href="about.html">About</a>
         </div>
       </nav>
     </div>
 
-    <h1>HEllo</h1>
+    <div class="jumbotron">
+      <h1>Welcome to Very Important Pets!</h1>
+      <h3>Our celebritites:</h3>
 
-    <h3>List of pets:</h3>
-    <p class="petsName"></p>
-    <p class="petsId"></p>
-    <p class="petsStatus"></p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Picture</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="petsName"></td>
+            <td class="petsStatus"></td>
+            <td><img alt="" class="petsImage" id="picture" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <script src="pets.js"></script>
     <script src="login.js"></script>
