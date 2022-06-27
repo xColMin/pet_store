@@ -4,6 +4,7 @@ const fetch = require("node-fetch");
 const express = require("express");
 const { response, request } = require("express");
 const bcrypt = require("bcrypt");
+
 var jwt = require("jsonwebtoken");
 
 const app = express();
@@ -17,7 +18,8 @@ const userDatabase = new Datastore("user_database.db");
 database.loadDatabase();
 userDatabase.loadDatabase();
 //database.insert({ name: "Gumersindo", id: 1, status: "sold" });
-
+var path = require("path");
+app.use(express.static(path.join(__dirname, "public")));
 app.listen(3000, () => console.log("listening at 3000"));
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
