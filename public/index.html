@@ -15,38 +15,41 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" href="css/custom.css" />
-    <title>Ps</title>
+    <title>VIPets</title>
   </head>
-
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-light"
-      style="background-color: #cee7fa"
-    >
-      <a class="navbar-brand" href="index.html">
-        <img src="images/VIPets.png" width="50" height="50" />
-      </a>
+    <div class="jumbotron" id="nav-jumbo">
+      <nav
+        class="navbar navbar-expand-lg navbar-light"
+        style="background-color: #cee7fa"
+      >
+        <a class="navbar-brand" href="index.html">
+          <img src="images/VIPets.png" width="50" height="50" />
+        </a>
 
-      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-item nav-link" href="login.html">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-item nav-link" href="login.html">Sign In</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-item nav-link" href="db.html" hidden>Admin</a>
-          </li>
-        </ul>
-      </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-item nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-item nav-link" href="signIn.html">Sing In</a>
+            </li>
+            <li class="nav-item">
+              <button class="d-none btn btn-outline-success my-2 my-sm-0">
+                Admin
+              </button>
+            </li>
+          </ul>
+        </div>
 
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" href="login.html">Catalog</a>
-        <a class="nav-item nav-link" href="login.html">Store</a>
-        <a class="nav-item nav-link" href="login.html">About</a>
-      </div>
-    </nav>
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#">Catalog</a>
+          <a class="nav-item nav-link" href="#">Store</a>
+          <a class="nav-item nav-link" href="#">About</a>
+        </div>
+      </nav>
+    </div>
 
     <h1>HEllo</h1>
 
@@ -56,5 +59,6 @@
     <p class="petsStatus"></p>
 
     <script src="pets.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>

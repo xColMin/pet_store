@@ -7,3 +7,18 @@ body {
   font-weight: 700;
   line-height: 23px;
 }
+
+/*
+#nav-jumbo {
+  background-color: rgb(197, 253, 230);
+  padding-top: 20%;
+  padding-bottom: 20%;
+}
+*/
+
+#nav-jumbo {
+  padding-top: 0px;
+  margin-top: 10px;
+  padding-bottom: 0px;
+  background-color: white;
+}

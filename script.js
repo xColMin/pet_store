@@ -86,3 +86,61 @@ app.post("/user_api/login", async (request, response) => {
     }
   });
 });
+
+app.post("/user_api/log_user", async (request, response) => {
+  userDatabase.find(
+    { "username": request.body.username },
+    function (err, docs) {
+      console.log(request.body.username);
+      let x = docs[0];
+      userDatabase.update(
+        { username: request.body.username },
+        {
+          "id": x["id"],
+          "username": x["username"],
+          "firstName": x["firstName"],
+          "lastName": x["lastName"],
+          "email": x["email"],
+          "password": x["password"],
+          "phone": x["phone"],
+          "userStatus": 1,
+          "_id": x["_id"],
+        },
+        {},
+        function (err, numReplaced) {
+          console.log("UPDATED");
+        }
+      );
+      userDatabase.loadDatabase();
+    }
+  );
+});
+
+app.post("/user_api/logout_user", async (request, response) => {
+  userDatabase.find(
+    { "username": request.body.username },
+    function (err, docs) {
+      console.log(request.body.username);
+      let x = docs[0];
+      userDatabase.update(
+        { username: request.body.username },
+        {
+          "id": x["id"],
+          "username": x["username"],
+          "firstName": x["firstName"],
+          "lastName": x["lastName"],
+          "email": x["email"],
+          "password": x["password"],
+          "phone": x["phone"],
+          "userStatus": 0,
+          "_id": x["_id"],
+        },
+        {},
+        function (err, numReplaced) {
+          console.log("UPDATED");
+        }
+      );
+      userDatabase.loadDatabase();
+    }
+  );
+});
