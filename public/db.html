@@ -14,22 +14,26 @@
 
     <script>
       async function getData() {
-        const response = await fetch("/api");
+        const response = await fetch("/pet_api");
         const data = await response.json();
         console.log(data);
 
         for (item of data) {
-          const root = document.createElement("div");
+          const table = document.createElement("table");
+          const tr = document.createElement("tr");
 
-          const petName = document.createElement("div");
-          petName.textContent = ` name: ${item.name}`;
-          const petStatus = document.createElement("div");
-          petStatus.textContent = ` status: ${item.status}`;
-          const petID = document.createElement("div");
-          petID.textContent = ` status: ${item.id}`;
+          const petName = document.createElement("td");
+          petName.textContent = item.name;
+          const petStatus = document.createElement("td");
+          petStatus.textContent = item.status;
+          const petPicture = document.createElement("td");
+          const pic = document.createElement("img");
+          pic.src = item.photoUrls;
 
-          root.append(petID, petName, petStatus);
-          document.body.append(root);
+          petPicture.append(pic);
+          tr.append(petName, petStatus, petPicture);
+          table.append(tr);
+          document.body.append(table);
         }
       }
       getData();

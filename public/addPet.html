@@ -54,18 +54,14 @@
 
     <div class="jumbotron">
       <h1>Add a new celebrity to our family!</h1>
-      <form
-        action="http://localhost:3000/public/images"
-        enctype="multipart/form-data"
-        method="post"
-      >
+      <form>
         <p>Pet Name:</p>
         <input type="text" name="username" id="petname" />
         <div class="form-group">
           <label for="exampleFormControlFile1">Upload Picture!</label>
           <input type="file" class="form-control-file" id="data" name="data" />
         </div>
-        <button type="submit" onclick="addPet()">Add Pet!</button>
+        <button type="button" onclick="addPet()">Add Pet!</button>
       </form>
     </div>
     <script src="addPet.js"></script>
