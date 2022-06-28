@@ -1,4 +1,9 @@
 async function addPet() {
+  let data = document.getElementById("b64").textContent;
+
+  console.log("DATAAAAAAAA");
+  console.log(typeof data);
+
   let id = Date.now();
   let name = document.getElementById("petname").value;
   const pet = {
@@ -7,7 +12,7 @@ async function addPet() {
       "name": name,
     },
     "name": name,
-    "photoUrls": [{ "profilePic": "string" }],
+    "photoUrls": [{ data }],
     "tags": [{ "id": id, "name": name }],
     "status": "available",
   };
@@ -23,6 +28,5 @@ async function addPet() {
 
   const jsonResponse = await fetch("/pet_api", options);
   const jsonData = await jsonResponse.json();
-  console.log(jsonData);
-  window.location.href = "index.html";
+  //window.location.href = "index.html";
 }

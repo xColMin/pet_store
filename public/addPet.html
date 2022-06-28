@@ -57,11 +57,26 @@
       <form>
         <p>Pet Name:</p>
         <input type="text" name="username" id="petname" />
-        <div class="form-group">
-          <label for="exampleFormControlFile1">Upload Picture!</label>
-          <input type="file" class="form-control-file" id="data" name="data" />
-        </div>
-        <button type="button" onclick="addPet()">Add Pet!</button>
+
+        <input id="inp" type="file" />
+        <p id="b64" hidden></p>
+        <img id="img" hidden />
+        <script>
+          function readFile() {
+            if (!this.files || !this.files[0]) return;
+
+            const FR = new FileReader();
+
+            FR.addEventListener("load", function (evt) {
+              document.querySelector("#img").src = evt.target.result;
+              document.querySelector("#b64").textContent = evt.target.result;
+            });
+
+            FR.readAsDataURL(this.files[0]);
+          }
+          document.querySelector("#inp").addEventListener("change", readFile);
+        </script>
+        <button type="button" id="add-pet" onclick="addPet()">Add Pet!</button>
       </form>
     </div>
     <script src="addPet.js"></script>
