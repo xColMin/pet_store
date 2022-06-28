@@ -19,8 +19,18 @@ async function getInfo() {
   if (response.status == 300) {
     var message = (document.getElementById("logHelp").textContent =
       "Succesfully logged in!");
-    logUser(username);
     window.location.href = "index.html";
+
+    const response = await fetch("/user_api/log_user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+      },
+      body: JSON.stringify({
+        "username": username,
+      }),
+    });
   } else if (response.status == 500) {
     var message = (document.getElementById("logHelp").textContent =
       "Wrong Password");
@@ -29,17 +39,19 @@ async function getInfo() {
       "User not found. Please Sign In");
   }
 }
-
+/*
 async function logUser(username) {
   const response = await fetch("/user_api/log_user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "accept": "application/json",
     },
     body: JSON.stringify({
       "username": username,
     }),
   });
+  const data = response.json();
 }
 
 async function logoutUser(username) {
@@ -53,3 +65,4 @@ async function logoutUser(username) {
     }),
   });
 }
+*/

@@ -32,6 +32,7 @@ async function getAvailablePets() {
   const jsonData = await jsonResponse.json();
 }
 
+/* 
 getAvailablePets().catch((error) => {
   console.log(error);
-});
+});*/

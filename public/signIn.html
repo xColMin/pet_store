@@ -53,21 +53,63 @@
     </div>
 
     <div class="jumbotron">
-      <h1>Welcome to Very Important Petsonalities</h1>
+      <h1>Welcome to Very Important Pets</h1>
 
       <form>
-        <p>User Name:</p>
-        <input type="text" name="username" id="username" />
-        <p>First Name:</p>
-        <input type="text" name="firstname" id="firstname" />
-        <p>Second Name:</p>
-        <input type="text" name="secondname" id="secondname" />
-        <p>Email:</p>
-        <input type="text" name="email" id="email" />
-        <p>Phone:</p>
-        <input type="text" name="phone" id="phone" />
-        <p>Password:</p>
-        <input type="password" name="password" id="password" />
+        <div class="form-group">
+          <label>User Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="User name"
+          />
+        </div>
+        <div class="form-group">
+          <label>First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstname"
+            placeholder="First name"
+          />
+        </div>
+        <div class="form-group">
+          <label>Second Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="secondname"
+            placeholder="Second name"
+          />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Email@example.com"
+          />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            placeholder="Phone number"
+          />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
         <button type="button" onclick="register()">Register</button>
       </form>
     </div>

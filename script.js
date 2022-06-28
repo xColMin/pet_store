@@ -144,3 +144,13 @@ app.post("/user_api/logout_user", async (request, response) => {
     }
   );
 });
+
+app.get("/is_admin", (request, response) => {
+  userDatabase.find({ "userStatus": 1 }, (err, data) => {
+    if (err) {
+      response.end();
+      return;
+    }
+    response.json(data);
+  });
+});

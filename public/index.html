@@ -43,7 +43,7 @@
           </ul>
         </div>
 
-        <div class="navbar-nav">
+        <div class="navbar-nav" id="navbar-main">
           <a class="nav-item nav-link" href="index.html">Catalog</a>
           <a class="nav-item nav-link" href="#">Store</a>
           <a class="nav-item nav-link" href="addPet.html">Add&nbspPet</a>
@@ -51,6 +51,15 @@
         </div>
       </nav>
     </div>
+
+    <script>
+      const navbar = document.getElementById("navbar-main");
+
+      async function isAdmin() {
+        const response = fetch("/is_admin");
+        const data = response.json();
+      }
+    </script>
 
     <script>
       async function getData() {
