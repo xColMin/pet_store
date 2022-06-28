@@ -46,7 +46,7 @@
         <div class="navbar-nav" id="navbar-main">
           <a class="nav-item nav-link" href="index.html">Catalog</a>
           <a class="nav-item nav-link" href="#">Store</a>
-          <a class="nav-item nav-link" href="addPet.html">Add&nbspPet</a>
+          <!--<a class="nav-item nav-link" href="addPet.html">Add&nbspPet</a>-->
           <a class="nav-item nav-link" href="about.html">About</a>
         </div>
       </nav>
@@ -64,11 +64,13 @@
         var size = Object.keys(data).length - 1;
 
         for (let i = 0; i <= size; i++) {
-          console.log(data[i]);
           if (data[i]["_id"] == "IGLAwEzJmo9dqnf8") {
-            console.log("Checking admin log status");
             if (data[i]["userStatus"] == 1) {
-              console.log("Admin logged");
+              const addPet = document.createElement("a");
+              addPet.href = "addPet.html";
+              addPet.textContent = `Add__Pet`;
+              addPet.className = "nav-item nav-link";
+              navbar.append(addPet);
             } else {
               break;
             }
