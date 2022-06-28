@@ -52,27 +52,48 @@
       </nav>
     </div>
 
-    <div class="jumbotron">
-      <h1>Welcome to Very Important Pets!</h1>
-      <h3>Our celebritites:</h3>
+    <script>
+      async function getData() {
+        const response = await fetch("/pet_api");
+        const data = await response.json();
+        console.log(data);
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Status</th>
-            <th scope="col">Picture</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="petsName"></td>
-            <td class="petsStatus"></td>
-            <td><img alt="" class="petsImage" id="picture" /></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        const root = document.createElement("div");
+        root.classList.add("jumbotron");
+        root.id = "catalog-jumbotron";
+
+        const h1 = document.createElement("h1");
+        h1.textContent = "Our celebritites:";
+        root.append(h1);
+
+        const row = document.createElement("div");
+        row.classList.add("row");
+        row.id = "catalog-row";
+
+        for (item of data) {
+          const figure = document.createElement("figure");
+          figure.id = "catalog-figure";
+
+          const pic = document.createElement("img");
+          pic.src = item.photoUrls;
+          pic.id = "catalog-img";
+          pic.width = 221;
+          pic.height = 228;
+
+          const figcaption = document.createElement("figcaption");
+          figcaption.textContent = `${item.name}`;
+          figcaption.id = "catalog-cap";
+
+          figure.append(figcaption);
+          figure.append(pic);
+          row.append(figure);
+        }
+
+        root.append(row);
+        document.body.append(root);
+      }
+      getData();
+    </script>
 
     <script src="pets.js"></script>
     <script src="login.js"></script>
