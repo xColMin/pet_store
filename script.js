@@ -15,6 +15,7 @@ const Datastore = require("nedb");
 const database = new Datastore("database.db");
 const userDatabase = new Datastore("user_database.db");
 
+logOutUsers();
 database.loadDatabase();
 userDatabase.loadDatabase();
 
@@ -107,9 +108,7 @@ app.post("/user_api/log_user", async (request, response) => {
           "_id": x["_id"],
         },
         {},
-        function (err, numReplaced) {
-          console.log("UPDATED");
-        }
+        function (err, numReplaced) {}
       );
       userDatabase.loadDatabase();
     }
@@ -154,3 +153,31 @@ app.get("/is_admin", (request, response) => {
     response.json(data);
   });
 });
+
+function logOutUsers() {
+  userDatabase.find({ userStatus: 1 }, function (err, docs) {
+    var size = Object.keys(docs).length - 1;
+
+    for (let i = 0; i <= size; i++) {
+      let x = docs[i];
+      userDatabase.update(
+        { userStatus: 1 },
+        {
+          "id": x["id"],
+          "username": x["username"],
+          "firstName": x["firstName"],
+          "lastName": x["lastName"],
+          "email": x["email"],
+          "password": x["password"],
+          "phone": x["phone"],
+          "userStatus": 0,
+          "_id": x["_id"],
+        },
+        {},
+        function (err, numReplaced) {}
+      );
+    }
+
+    userDatabase.loadDatabase();
+  });
+}
