@@ -92,7 +92,6 @@ app.post("/user_api/log_user", async (request, response) => {
   userDatabase.find(
     { "username": request.body.username },
     function (err, docs) {
-      console.log(request.body.username);
       let x = docs[0];
       userDatabase.update(
         { username: request.body.username },
@@ -145,7 +144,7 @@ app.post("/user_api/logout_user", async (request, response) => {
 });
 
 app.get("/is_admin", (request, response) => {
-  userDatabase.find({ "userStatus": 1 }, (err, data) => {
+  userDatabase.find({}, (err, data) => {
     if (err) {
       response.end();
       return;
