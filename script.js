@@ -14,10 +14,12 @@ const Datastore = require("nedb");
 
 const database = new Datastore("database.db");
 const userDatabase = new Datastore("user_database.db");
+const storeDatabase = new Datastore("store_database.db");
 
 logOutUsers();
 database.loadDatabase();
 userDatabase.loadDatabase();
+storeDatabase.loadDatabase();
 
 var path = require("path");
 app.use(express.static(path.join(__dirname, "public")));
@@ -189,3 +191,10 @@ function logOutUsers() {
     userDatabase.loadDatabase();
   });
 }
+
+app.post("/store", (request, response) => {
+  const data = request.body;
+  storeDatabase.insert(data);
+  response.json(data);
+  response.end();
+});

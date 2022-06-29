@@ -66,6 +66,11 @@ body {
   text-align: center;
 }
 
+#catalog-btn {
+  background-color: rgb(144, 255, 181);
+  margin-left: 65px;
+}
+
 .carousel {
   width: 221px;
   height: 228px;
@@ -84,4 +89,8 @@ body {
 
 #category {
   margin-bottom: 10px;
+}
+
+label {
+  margin-left: 10px;
 }
