@@ -69,12 +69,12 @@
             if (data[i]["userStatus"] == 1) {
               const addPet = document.createElement("a");
               addPet.href = "addPet.html";
-              addPet.textContent = `Add__Pet`;
+              addPet.textContent = `Add\xa0Pet`;
               addPet.className = "nav-item nav-link";
               navbar.append(addPet);
               const adminPanel = document.createElement("a");
               adminPanel.href = "adminPanel.html";
-              adminPanel.textContent = `Admin__Panel`;
+              adminPanel.textContent = `Admin\xa0Panel`;
               adminPanel.className = "nav-item nav-link";
               navbar.append(adminPanel);
             } else {
@@ -87,6 +87,7 @@
 
     <script>
       const loginAnchor = document.getElementById("login-anchor");
+
       isLogIn();
 
       async function isLogIn() {
@@ -96,10 +97,14 @@
         var size = Object.keys(data).length - 1;
 
         let login = false;
+        let admin = false;
 
         for (let i = 0; i <= size; i++) {
           if (data[i]["userStatus"] == 1) {
             login = true;
+            if (data[i]["_id"] == "IGLAwEzJmo9dqnf8") {
+              admin = true;
+            }
             break;
           }
         }
@@ -119,6 +124,13 @@
           };
           logOutOption.href = "#";
           loginAnchor.append(logOutOption);
+          if (!admin) {
+            const myPurcahses = document.createElement("a");
+            myPurcahses.textContent = `My\xa0VIPs`;
+            myPurcahses.className = "nav-item nav-link";
+            myPurcahses.href = "my_vips.html";
+            navbar.append(myPurcahses);
+          }
         }
       }
 
