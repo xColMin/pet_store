@@ -2,9 +2,7 @@ async function addPet() {
   let data = document.getElementById("b64").textContent;
   let category = document.getElementById("category").value;
   let price = document.getElementById("price").value;
-  let quantity = document.getElementById("quantity").value;
 
-  let id = Date.now();
   let name = document.getElementById("petname").value;
   const pet = {
     "category": {
@@ -14,8 +12,7 @@ async function addPet() {
     "name": name,
     "price": price,
     "photoUrls": [{ data }],
-    "tags": [{ "id": id, "name": name }],
-    "status": [{ "available": quantity, "pending": 0, "sold": 0 }],
+    "status": "available",
   };
 
   const options = {

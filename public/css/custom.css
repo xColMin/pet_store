@@ -81,3 +81,7 @@ body {
   padding-bottom: 20px;
   background-color: rgb(61, 226, 185);
 }
+
+#category {
+  margin-bottom: 10px;
+}
