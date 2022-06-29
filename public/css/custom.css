@@ -65,3 +65,19 @@ body {
 #catalog-cap {
   text-align: center;
 }
+
+.carousel {
+  width: 221px;
+  height: 228px;
+  align-items: center;
+}
+
+#carousel-jumbo {
+  margin-left: 450px;
+  margin-right: 550px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 20px;
+  background-color: rgb(61, 226, 185);
+}
