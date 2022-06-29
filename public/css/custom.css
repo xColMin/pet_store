@@ -68,7 +68,6 @@ body {
 
 #catalog-btn {
   background-color: rgb(144, 255, 181);
-  margin-left: 65px;
 }
 
 .carousel {
@@ -78,7 +77,7 @@ body {
 }
 
 #carousel-jumbo {
-  margin-left: 450px;
+  margin-left: 500px;
   margin-right: 550px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -93,4 +92,21 @@ body {
 
 label {
   margin-left: 10px;
+}
+
+#vip-daily {
+  text-align: center;
+  background-color: rgb(61, 226, 185);
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#catalog-lab {
+  text-align: center;
+}
+
+#sold-lab {
+  color: brown;
 }

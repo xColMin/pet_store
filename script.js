@@ -198,3 +198,26 @@ app.post("/store", (request, response) => {
   response.json(data);
   response.end();
 });
+
+app.post("/pet_api/sold", async (request, response) => {
+  database.find({ "_id": request.body.petId }, function (err, docs) {
+    console.log(docs);
+    let x = docs[0];
+    database.update(
+      { _id: request.body.petId },
+      {
+        "category": {
+          "id": x["category"]["id"],
+          "name": x["category"]["name"],
+        },
+        "name": x["name"],
+        "price": x["price"],
+        "photoUrls": x["photoUrls"],
+        "status": "sold",
+      },
+      {},
+      function (err, numReplaced) {}
+    );
+    database.loadDatabase();
+  });
+});

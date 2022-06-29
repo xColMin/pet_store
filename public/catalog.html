@@ -161,21 +161,31 @@
           figcaption.id = "catalog-cap";
 
           const subtitle = document.createElement("figcaption");
-          const buy = document.createElement("button");
-          buy.textContent = "Adopt";
-          buy.id = "catalog-btn";
-          buy.data = item;
-          buy.onclick = function () {
-            placeOrder(buy.data);
-          };
-          const price = document.createElement("label");
-          price.textContent = `${item.price} $`;
+          subtitle.id = "catalog-lab";
 
           figure.append(figcaption);
           figure.append(pic);
-          buy.append(price);
-          subtitle.append(buy);
-          subtitle.append(price);
+
+          if (item.status == "available") {
+            const buy = document.createElement("button");
+            buy.textContent = "Adopt";
+            buy.id = "catalog-btn";
+            buy.data = item;
+            buy.onclick = function () {
+              placeOrder(buy.data);
+            };
+            const price = document.createElement("label");
+            price.textContent = `${item.price} $`;
+            buy.append(price);
+            subtitle.append(buy);
+            subtitle.append(price);
+          } else {
+            const sold = document.createElement("label");
+            sold.textContent = `Adopted!`;
+            sold.id = "sold-lab";
+            subtitle.append(sold);
+          }
+
           figure.append(subtitle);
           row.append(figure);
         }
@@ -225,6 +235,9 @@
 
         const jsonResponse = await fetch("/store", options);
         const jsonData = await jsonResponse.json();
+
+        const orderResponse = await fetch("/pet_api/sold", options);
+        const orderData = await jsonResponse.json();
       }
     </script>
 
