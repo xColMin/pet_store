@@ -29,8 +29,8 @@
 
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-item nav-link" href="login.html">Login</a>
+            <li class="nav-item" id="login-anchor">
+              <!--<a class="nav-item nav-link" href="login.html">Login</a>-->
             </li>
             <li class="nav-item">
               <a class="nav-item nav-link" href="signIn.html">Sing In</a>
@@ -75,6 +75,39 @@
               break;
             }
           }
+        }
+      }
+    </script>
+
+    <script>
+      const loginAnchor = document.getElementById("login-anchor");
+      isLogIn();
+
+      async function isLogIn() {
+        const response = await fetch("/is_login");
+        const data = await response.json();
+
+        var size = Object.keys(data).length - 1;
+
+        let login = false;
+
+        for (let i = 0; i <= size; i++) {
+          if (data[i]["userStatus"] == 1) {
+            login = true;
+            break;
+          }
+        }
+        const loginOption = document.createElement("a");
+
+        if (!login) {
+          loginOption.href = "login.html";
+          loginOption.textContent = `Login`;
+          loginOption.className = "nav-item nav-link";
+          loginAnchor.append(loginOption);
+        } else {
+          loginOption.textContent = `Logout`;
+          loginOption.className = "nav-item nav-link";
+          loginAnchor.append(loginOption);
         }
       }
     </script>

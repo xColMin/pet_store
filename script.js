@@ -153,6 +153,16 @@ app.get("/is_admin", (request, response) => {
   });
 });
 
+app.get("/is_login", (request, response) => {
+  userDatabase.find({}, (err, data) => {
+    if (err) {
+      response.end();
+      return;
+    }
+    response.json(data);
+  });
+});
+
 function logOutUsers() {
   userDatabase.find({ userStatus: 1 }, function (err, docs) {
     var size = Object.keys(docs).length - 1;
