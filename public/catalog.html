@@ -167,7 +167,6 @@
           buy.data = item;
           buy.onclick = function () {
             placeOrder(buy.data);
-            //alert(`${buy.data.name} has a new home!`);
           };
           const price = document.createElement("label");
           price.textContent = `${item.price} $`;
@@ -192,14 +191,11 @@
         const response = await fetch("/is_login");
         const data = await response.json();
 
-        var size = Object.keys(data).length;
+        var size = Object.keys(data).length - 1;
 
         let user = "No user logged in";
 
-        console.log(data);
-
         for (let i = 0; i <= size; i++) {
-          console.log(data[i]);
           if (data[i]["userStatus"] == 1) {
             user = data[i]["_id"];
             break;
