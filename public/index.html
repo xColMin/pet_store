@@ -97,18 +97,32 @@
             break;
           }
         }
-        const loginOption = document.createElement("a");
 
         if (!login) {
+          const loginOption = document.createElement("a");
           loginOption.href = "login.html";
           loginOption.textContent = `Login`;
           loginOption.className = "nav-item nav-link";
           loginAnchor.append(loginOption);
         } else {
-          loginOption.textContent = `Logout`;
-          loginOption.className = "nav-item nav-link";
-          loginAnchor.append(loginOption);
+          const logOutOption = document.createElement("a");
+          logOutOption.textContent = `Logout`;
+          logOutOption.className = "nav-item nav-link";
+          logOutOption.onclick = function () {
+            logOut();
+          };
+          logOutOption.href = "#";
+          loginAnchor.append(logOutOption);
         }
+      }
+
+      async function logOut() {
+        console.log("Log Out");
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        };
+        const response = await fetch("/user_api/logout_user", options);
       }
     </script>
 

@@ -115,13 +115,13 @@ app.post("/user_api/log_user", async (request, response) => {
 });
 
 app.post("/user_api/logout_user", async (request, response) => {
-  userDatabase.find(
-    { "username": request.body.username },
-    function (err, docs) {
-      console.log(request.body.username);
-      let x = docs[0];
+  userDatabase.find({ userStatus: 1 }, function (err, docs) {
+    var size = Object.keys(docs).length - 1;
+
+    for (let i = 0; i <= size; i++) {
+      let x = docs[i];
       userDatabase.update(
-        { username: request.body.username },
+        { userStatus: 1 },
         {
           "id": x["id"],
           "username": x["username"],
@@ -134,13 +134,12 @@ app.post("/user_api/logout_user", async (request, response) => {
           "_id": x["_id"],
         },
         {},
-        function (err, numReplaced) {
-          console.log("UPDATED");
-        }
+        function (err, numReplaced) {}
       );
-      userDatabase.loadDatabase();
     }
-  );
+
+    userDatabase.loadDatabase();
+  });
 });
 
 app.get("/is_admin", (request, response) => {
