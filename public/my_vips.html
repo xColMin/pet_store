@@ -160,7 +160,10 @@
             if (orderData[j]["status"] == "placed") {
               ids.push(orderData[j]["petId"]);
             } else if (orderData[j]["status"] == "cancelled") {
-              ids.pop(orderData[j]["petId"]);
+              let index = ids.findIndex((id) => {
+                id === orderData[j]["status"];
+              });
+              ids.splice(index, 1);
             }
           }
         }
@@ -243,7 +246,7 @@
           alert(`Please Log in!`);
           return;
         } else {
-          alert(`$Your oder has been cancelled!`);
+          alert(`Your oder has been cancelled!`);
         }
 
         const order = {
