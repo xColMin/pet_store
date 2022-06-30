@@ -133,7 +133,7 @@
       <label for="views">Choose a View:</label>
       <select name="views" id="views">
         <option value="inventory">Inventory</option>
-        <option value="orders">Orders Summary</option>
+        <option value="orders">Orders</option>
         <option value="last-orders">Last Orders</option>
         <option value="user-activity">User Activity</option>
       </select>
@@ -143,9 +143,9 @@
       let view = document.getElementById("views").value;
 
       if (view == "inventory") {
-        console.log("Loading");
         loadInventory();
       } else if (view == "orders") {
+        loadOrders();
       } else if (view == "last-orders") {
       } else if (view == "user-activity") {
       }
@@ -320,6 +320,25 @@
 
         table.append(tbody);
         div.append(table);
+        document.body.append(div);
+      }
+
+      async function loadOrders() {
+        const response = await fetch("/store/orders");
+        const data = await response.json();
+
+        const div = document.createElement("div");
+        div.id = "inventory-div";
+        div.classList.add("jumbotron");
+
+        for (let i = 0; i <= data.length - 1; i++) {
+          console.log(data[i]);
+
+          const td1 = document.createElement("pre");
+          td1.textContent = JSON.stringify(data[i]);
+
+          div.append(td1);
+        }
         document.body.append(div);
       }
     </script>
