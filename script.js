@@ -42,6 +42,7 @@ app.post("/pet_api", async (request, response) => {
   database.insert(data);
   response.json(data);
   response.end();
+  database.loadDatabase();
 });
 
 app.get("/user_api", (request, response) => {
@@ -213,7 +214,7 @@ app.post("/pet_api/sold", async (request, response) => {
         "name": x["name"],
         "price": x["price"],
         "photoUrls": x["photoUrls"],
-        "status": "sold",
+        "status": "adopted",
       },
       {},
       function (err, numReplaced) {}
@@ -271,3 +272,14 @@ app.post("/store/cancel", async (request, response) => {
     database.loadDatabase();
   });
 });
+
+app.get("/store/inventory"),
+  (request, response) => {
+    database.find({}, (err, data) => {
+      if (err) {
+        response.end();
+        return;
+      }
+      response.json(data);
+    });
+  };
