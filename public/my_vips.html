@@ -134,12 +134,43 @@
         const response = await fetch("/pet_api");
         const data = await response.json();
 
+        const orderResponse = await fetch("/store/orders");
+        const orderData = await orderResponse.json();
+
+        const userResponse = await fetch("/is_login");
+        const userData = await userResponse.json();
+
+        var size = Object.keys(userData).length - 1;
+
+        let userID = undefined;
+
+        for (let i = 0; i <= size; i++) {
+          if (userData[i]["userStatus"] == 1) {
+            userID = userData[i]["_id"];
+            break;
+          }
+        }
+
+        let ids = [];
+
+        size = Object.keys(orderData).length - 1;
+
+        for (let j = 0; j <= size; j++) {
+          if (orderData[j]["userID"] == userID) {
+            if (orderData[j]["status"] == "placed") {
+              ids.push(orderData[j]["petId"]);
+            } else if (orderData[j]["status"] == "cancelled") {
+              ids.pop(orderData[j]["petId"]);
+            }
+          }
+        }
+
         const root = document.createElement("div");
         root.classList.add("jumbotron");
         root.id = "catalog-jumbotron";
 
         const h1 = document.createElement("h1");
-        h1.textContent = "My adoptions";
+        h1.textContent = "My Adoptions";
         root.append(h1);
 
         const row = document.createElement("div");
@@ -147,47 +178,43 @@
         row.id = "catalog-row";
 
         for (item of data) {
-          const figure = document.createElement("figure");
-          figure.id = "catalog-figure";
+          if (ids.includes(item["_id"])) {
+            const figure = document.createElement("figure");
+            figure.id = "catalog-figure";
 
-          const pic = document.createElement("img");
-          pic.src = item.photoUrls[0].data;
-          pic.id = "catalog-img";
-          pic.width = 221;
-          pic.height = 228;
+            const pic = document.createElement("img");
+            pic.src = item.photoUrls[0].data;
+            pic.id = "catalog-img";
+            pic.width = 221;
+            pic.height = 228;
 
-          const figcaption = document.createElement("figcaption");
-          figcaption.textContent = `${item.name}`;
-          figcaption.id = "catalog-cap";
+            const figcaption = document.createElement("figcaption");
+            figcaption.textContent = `${item.name}`;
+            figcaption.id = "catalog-cap";
 
-          const subtitle = document.createElement("figcaption");
-          subtitle.id = "catalog-lab";
+            const subtitle = document.createElement("figcaption");
+            subtitle.id = "catalog-lab";
 
-          figure.append(figcaption);
-          figure.append(pic);
+            figure.append(figcaption);
+            figure.append(pic);
 
-          if (item.status == "available") {
-            const buy = document.createElement("button");
-            buy.textContent = "Adopt";
-            buy.id = "catalog-btn";
-            buy.data = item;
-            buy.onclick = function () {
-              placeOrder(buy.data);
+            const cancel = document.createElement("button");
+            cancel.textContent = "Cancel";
+            cancel.id = "catalog-cancel-btn";
+            cancel.data = item;
+            cancel.onclick = function () {
+              cancelOrder(cancel.data);
             };
-            const price = document.createElement("label");
-            price.textContent = `${item.price} $`;
-            buy.append(price);
-            subtitle.append(buy);
-            subtitle.append(price);
-          } else {
-            const sold = document.createElement("label");
-            sold.textContent = `Adopted!`;
-            sold.id = "sold-lab";
-            subtitle.append(sold);
-          }
+            const pending = document.createElement("label");
+            pending.textContent = `Pending`;
 
-          figure.append(subtitle);
-          row.append(figure);
+            subtitle.append(cancel);
+            cancel.append(pending);
+            subtitle.append(pending);
+
+            figure.append(subtitle);
+            row.append(figure);
+          }
         }
 
         root.append(row);
@@ -197,7 +224,7 @@
     </script>
 
     <script>
-      async function placeOrder(pet) {
+      async function cancelOrder(pet) {
         const response = await fetch("/is_login");
         const data = await response.json();
 
@@ -216,14 +243,14 @@
           alert(`Please Log in!`);
           return;
         } else {
-          alert(`${pet.name} has a new home!`);
+          alert(`$Your oder has been cancelled!`);
         }
 
         const order = {
           "petId": pet["_id"],
           "userID": user,
-          "shipDate": "2022-06-29T06:02:58.719Z",
-          "status": "placed",
+          "shipDate": Date.now(),
+          "status": "cancelled",
           "complete": true,
         };
 
@@ -236,7 +263,7 @@
         const jsonResponse = await fetch("/store", options);
         const jsonData = await jsonResponse.json();
 
-        const orderResponse = await fetch("/pet_api/sold", options);
+        const orderResponse = await fetch("/pet_api/cancel", options);
         const orderData = await jsonResponse.json();
       }
     </script>

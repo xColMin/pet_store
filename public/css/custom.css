@@ -70,6 +70,10 @@ body {
   background-color: rgb(144, 255, 181);
 }
 
+#catalog-cancel-btn {
+  background-color: rgb(252, 71, 58);
+}
+
 .carousel {
   width: 221px;
   height: 228px;

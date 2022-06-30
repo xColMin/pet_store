@@ -221,3 +221,36 @@ app.post("/pet_api/sold", async (request, response) => {
     database.loadDatabase();
   });
 });
+
+app.post("/pet_api/cancel", async (request, response) => {
+  database.find({ "_id": request.body.petId }, function (err, docs) {
+    console.log(docs);
+    let x = docs[0];
+    database.update(
+      { _id: request.body.petId },
+      {
+        "category": {
+          "id": x["category"]["id"],
+          "name": x["category"]["name"],
+        },
+        "name": x["name"],
+        "price": x["price"],
+        "photoUrls": x["photoUrls"],
+        "status": "available",
+      },
+      {},
+      function (err, numReplaced) {}
+    );
+    database.loadDatabase();
+  });
+});
+
+app.get("/store/orders", (request, response) => {
+  storeDatabase.find({}, (err, data) => {
+    if (err) {
+      response.end();
+      return;
+    }
+    response.json(data);
+  });
+});
