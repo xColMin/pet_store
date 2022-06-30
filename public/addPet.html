@@ -20,114 +20,128 @@
   <body>
      <!--NAVBAR-->
 
-  <body>
-    <div class="jumbotron" id="nav-jumbo">
-      <nav
-        class="navbar navbar-expand-lg navbar-light"
-        style="background-color: #cee7fa"
-      >
-        <a class="navbar-brand" href="index.html">
-          <img src="images/VIPets.png" width="50" height="50" />
-        </a>
-
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item" id="login-anchor">
-              <!--<a class="nav-item nav-link" href="login.html">Login</a>-->
-            </li>
-            <li class="nav-item">
-              <a class="nav-item nav-link" href="signIn.html">Sing In</a>
-            </li>
-            <li class="nav-item">
-              <button class="d-none btn btn-outline-success my-2 my-sm-0">
-                Admin
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        <div class="navbar-nav" id="navbar-main">
-          <a class="nav-item nav-link" href="index.html">Catalog</a>
-          <a class="nav-item nav-link" href="#">Store</a>
-          <!--<a class="nav-item nav-link" href="addPet.html">Add&nbspPet</a>-->
-          <a class="nav-item nav-link" href="about.html">About</a>
-        </div>
-      </nav>
-    </div>
-
-    <script>
-      const navbar = document.getElementById("navbar-main");
-
-      isAdmin();
-
-      async function isAdmin() {
-        const response = await fetch("/is_admin");
-        const data = await response.json();
-
-        var size = Object.keys(data).length - 1;
-
-        for (let i = 0; i <= size; i++) {
-          if (data[i]["_id"] == "IGLAwEzJmo9dqnf8") {
-            if (data[i]["userStatus"] == 1) {
-              const addPet = document.createElement("a");
-              addPet.href = "addPet.html";
-              addPet.textContent = `Add__Pet`;
-              addPet.className = "nav-item nav-link";
-              navbar.append(addPet);
-            } else {
-              break;
+     <body>
+      <div class="jumbotron" id="nav-jumbo">
+        <nav
+          class="navbar navbar-expand-lg navbar-light"
+          style="background-color: #cee7fa"
+        >
+          <a class="navbar-brand" href="index.html">
+            <img src="images/VIPets.png" width="50" height="50" />
+          </a>
+  
+          <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item" id="login-anchor">
+                <!--<a class="nav-item nav-link" href="login.html">Login</a>-->
+              </li>
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="signIn.html">Sing In</a>
+              </li>
+              <li class="nav-item">
+                <button class="d-none btn btn-outline-success my-2 my-sm-0">
+                  Admin
+                </button>
+              </li>
+            </ul>
+          </div>
+  
+          <div class="navbar-nav" id="navbar-main">
+            <a class="nav-item nav-link" href="catalog.html">Catalog</a>
+          </div>
+        </nav>
+      </div>
+  
+      <script>
+        const navbar = document.getElementById("navbar-main");
+  
+        isAdmin();
+  
+        async function isAdmin() {
+          const response = await fetch("/is_admin");
+          const data = await response.json();
+  
+          var size = Object.keys(data).length - 1;
+  
+          for (let i = 0; i <= size; i++) {
+            if (data[i]["_id"] == "IGLAwEzJmo9dqnf8") {
+              if (data[i]["userStatus"] == 1) {
+                const addPet = document.createElement("a");
+                addPet.href = "addPet.html";
+                addPet.textContent = `Add\xa0Pet`;
+                addPet.className = "nav-item nav-link";
+                navbar.append(addPet);
+                const adminPanel = document.createElement("a");
+                adminPanel.href = "adminPanel.html";
+                adminPanel.textContent = `Admin\xa0Panel`;
+                adminPanel.className = "nav-item nav-link";
+                navbar.append(adminPanel);
+              } else {
+                break;
+              }
             }
           }
         }
-      }
-    </script>
-
-    <script>
-      const loginAnchor = document.getElementById("login-anchor");
-      isLogIn();
-
-      async function isLogIn() {
-        const response = await fetch("/is_login");
-        const data = await response.json();
-
-        var size = Object.keys(data).length - 1;
-
-        let login = false;
-
-        for (let i = 0; i <= size; i++) {
-          if (data[i]["userStatus"] == 1) {
-            login = true;
-            break;
+      </script>
+  
+      <script>
+        const loginAnchor = document.getElementById("login-anchor");
+  
+        isLogIn();
+  
+        async function isLogIn() {
+          const response = await fetch("/is_login");
+          const data = await response.json();
+  
+          var size = Object.keys(data).length - 1;
+  
+          let login = false;
+          let admin = false;
+  
+          for (let i = 0; i <= size; i++) {
+            if (data[i]["userStatus"] == 1) {
+              login = true;
+              if (data[i]["_id"] == "IGLAwEzJmo9dqnf8") {
+                admin = true;
+              }
+              break;
+            }
+          }
+  
+          if (!login) {
+            const loginOption = document.createElement("a");
+            loginOption.href = "login.html";
+            loginOption.textContent = `Login`;
+            loginOption.className = "nav-item nav-link";
+            loginAnchor.append(loginOption);
+          } else {
+            const logOutOption = document.createElement("a");
+            logOutOption.textContent = `Logout`;
+            logOutOption.className = "nav-item nav-link";
+            logOutOption.onclick = function () {
+              logOut();
+            };
+            logOutOption.href = "#";
+            loginAnchor.append(logOutOption);
+            if (!admin) {
+              const myPurcahses = document.createElement("a");
+              myPurcahses.textContent = `My\xa0VIPs`;
+              myPurcahses.className = "nav-item nav-link";
+              myPurcahses.href = "my_vips.html";
+              navbar.append(myPurcahses);
+            }
           }
         }
-
-        if (!login) {
-          const loginOption = document.createElement("a");
-          loginOption.href = "login.html";
-          loginOption.textContent = `Login`;
-          loginOption.className = "nav-item nav-link";
-          loginAnchor.append(loginOption);
-        } else {
-          const logOutOption = document.createElement("a");
-          logOutOption.textContent = `Logout`;
-          logOutOption.className = "nav-item nav-link";
-          logOutOption.onclick = function () {
-            logOut();
+  
+        async function logOut() {
+          console.log("Log Out");
+          const options = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
           };
-          logOutOption.href = "#";
-          loginAnchor.append(logOutOption);
+          const response = await fetch("/user_api/logout_user", options);
         }
-      }
-
-      async function logOut() {
-        console.log("Log Out");
-        const options = {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        };
-        const response = await fetch("/user_api/logout_user", options);
-      }
-    </script>
+      </script>
 
     <!--END NAVBAR-->
 
