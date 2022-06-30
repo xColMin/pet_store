@@ -69,9 +69,14 @@
             if (data[i]["userStatus"] == 1) {
               const addPet = document.createElement("a");
               addPet.href = "addPet.html";
-              addPet.textContent = `Add__Pet`;
+              addPet.textContent = `Add\xa0Pet`;
               addPet.className = "nav-item nav-link";
               navbar.append(addPet);
+              const adminPanel = document.createElement("a");
+              adminPanel.href = "adminPanel.html";
+              adminPanel.textContent = `Admin\xa0Panel`;
+              adminPanel.className = "nav-item nav-link";
+              navbar.append(adminPanel);
             } else {
               break;
             }
@@ -82,6 +87,7 @@
 
     <script>
       const loginAnchor = document.getElementById("login-anchor");
+
       isLogIn();
 
       async function isLogIn() {
@@ -91,10 +97,14 @@
         var size = Object.keys(data).length - 1;
 
         let login = false;
+        let admin = false;
 
         for (let i = 0; i <= size; i++) {
           if (data[i]["userStatus"] == 1) {
             login = true;
+            if (data[i]["_id"] == "IGLAwEzJmo9dqnf8") {
+              admin = true;
+            }
             break;
           }
         }
@@ -114,11 +124,17 @@
           };
           logOutOption.href = "#";
           loginAnchor.append(logOutOption);
+          if (!admin) {
+            const myPurcahses = document.createElement("a");
+            myPurcahses.textContent = `My\xa0VIPs`;
+            myPurcahses.className = "nav-item nav-link";
+            myPurcahses.href = "my_vips.html";
+            navbar.append(myPurcahses);
+          }
         }
       }
 
       async function logOut() {
-        console.log("Log Out");
         const options = {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -126,11 +142,10 @@
         const response = await fetch("/user_api/logout_user", options);
       }
     </script>
-
     <!--END NAVBAR-->
 
     <script>
-      async function getData() {
+      async function getDataMyPets() {
         const response = await fetch("/pet_api");
         const data = await response.json();
 
@@ -155,19 +170,19 @@
 
         size = Object.keys(orderData).length - 1;
 
-        for (let j = 0; j <= size; j++) {
+        console.log(orderData);
+
+        for (let j = size; j >= 0; j--) {
+          console.log(j);
+          console.log(orderData[j]);
+          let removed = false;
+
           if (orderData[j]["userID"] == userID) {
             if (orderData[j]["status"] == "placed") {
               ids.push(orderData[j]["petId"]);
-            } else if (orderData[j]["status"] == "cancelled") {
-              let index = ids.findIndex((id) => {
-                id === orderData[j]["status"];
-              });
-              ids.splice(index, 1);
             }
           }
         }
-
         const root = document.createElement("div");
         root.classList.add("jumbotron");
         root.id = "catalog-jumbotron";
@@ -222,8 +237,9 @@
 
         root.append(row);
         document.body.append(root);
+        ids = [];
       }
-      getData();
+      getDataMyPets();
     </script>
 
     <script>
@@ -263,11 +279,8 @@
           body: JSON.stringify(order),
         };
 
-        const jsonResponse = await fetch("/store", options);
+        const jsonResponse = await fetch("/store/cancel", options);
         const jsonData = await jsonResponse.json();
-
-        const orderResponse = await fetch("/pet_api/cancel", options);
-        const orderData = await jsonResponse.json();
       }
     </script>
 

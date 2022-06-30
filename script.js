@@ -197,11 +197,11 @@ app.post("/store", (request, response) => {
   storeDatabase.insert(data);
   response.json(data);
   response.end();
+  storeDatabase.loadDatabase();
 });
 
 app.post("/pet_api/sold", async (request, response) => {
   database.find({ "_id": request.body.petId }, function (err, docs) {
-    console.log(docs);
     let x = docs[0];
     database.update(
       { _id: request.body.petId },
@@ -222,9 +222,36 @@ app.post("/pet_api/sold", async (request, response) => {
   });
 });
 
-app.post("/pet_api/cancel", async (request, response) => {
+app.get("/store/orders", (request, response) => {
+  storeDatabase.find({}, (err, data) => {
+    if (err) {
+      response.end();
+      return;
+    }
+    response.json(data);
+  });
+});
+
+app.post("/store/cancel", async (request, response) => {
+  storeDatabase.find({ "petId": request.body.petId }, function (err, docs) {
+    let x = docs[0];
+    storeDatabase.update(
+      { petId: request.body.petId },
+      {
+        "petId": request.body.petId,
+        "userID": x["userID"],
+        "shipDate": Date.now(),
+        "status": "cancelled",
+        "complete": true,
+        "_id": x["_id"],
+      },
+      {},
+      function (err, numReplaced) {}
+    );
+    storeDatabase.loadDatabase();
+  });
+
   database.find({ "_id": request.body.petId }, function (err, docs) {
-    console.log(docs);
     let x = docs[0];
     database.update(
       { _id: request.body.petId },
@@ -242,15 +269,5 @@ app.post("/pet_api/cancel", async (request, response) => {
       function (err, numReplaced) {}
     );
     database.loadDatabase();
-  });
-});
-
-app.get("/store/orders", (request, response) => {
-  storeDatabase.find({}, (err, data) => {
-    if (err) {
-      response.end();
-      return;
-    }
-    response.json(data);
   });
 });
