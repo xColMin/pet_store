@@ -120,6 +120,14 @@
           logOutOption.className = "nav-item nav-link";
           logOutOption.onclick = function () {
             logOut();
+            logOutOption.remove();
+            const loginOption = document.createElement("a");
+            loginOption.href = "login.html";
+            loginOption.textContent = `Login`;
+            loginOption.className = "nav-item nav-link";
+            loginAnchor.append(loginOption);
+            let my = document.getElementById("my-vips");
+            my.remove();
           };
           logOutOption.href = "#";
           loginAnchor.append(logOutOption);
@@ -128,6 +136,7 @@
             myPurcahses.textContent = `My\xa0VIPs`;
             myPurcahses.className = "nav-item nav-link";
             myPurcahses.href = "my_vips.html";
+            myPurcahses.id = "my-vips";
             navbar.append(myPurcahses);
           }
         }
