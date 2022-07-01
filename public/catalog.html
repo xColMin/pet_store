@@ -188,6 +188,12 @@
             buy.data = item;
             buy.onclick = function () {
               placeOrder(buy.data);
+              this.remove();
+              price.remove();
+              const sold = document.createElement("label");
+              sold.textContent = `Adopted!`;
+              sold.id = "sold-lab";
+              subtitle.append(sold);
             };
             const price = document.createElement("label");
             price.textContent = `${item.price} $`;
