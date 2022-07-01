@@ -48,7 +48,6 @@
 
         <div class="navbar-nav" id="navbar-main">
           <a class="nav-item nav-link" href="catalog.html">Catalog</a>
-          <a class="nav-item nav-link" href="store.html">Store</a>
         </div>
       </nav>
     </div>
@@ -69,9 +68,16 @@
             if (data[i]["userStatus"] == 1) {
               const addPet = document.createElement("a");
               addPet.href = "addPet.html";
-              addPet.textContent = `Add__Pet`;
+              addPet.textContent = `Add\xa0Pet`;
               addPet.className = "nav-item nav-link";
+              addPet.id = "add-pet";
               navbar.append(addPet);
+              const adminPanel = document.createElement("a");
+              adminPanel.href = "adminPanel.html";
+              adminPanel.textContent = `Admin\xa0Panel`;
+              adminPanel.className = "nav-item nav-link";
+              adminPanel.id = "admin-panel";
+              navbar.append(adminPanel);
             } else {
               break;
             }
@@ -82,6 +88,7 @@
 
     <script>
       const loginAnchor = document.getElementById("login-anchor");
+
       isLogIn();
 
       async function isLogIn() {
@@ -91,10 +98,14 @@
         var size = Object.keys(data).length - 1;
 
         let login = false;
+        let admin = false;
 
         for (let i = 0; i <= size; i++) {
           if (data[i]["userStatus"] == 1) {
             login = true;
+            if (data[i]["_id"] == "IGLAwEzJmo9dqnf8") {
+              admin = true;
+            }
             break;
           }
         }
@@ -111,9 +122,32 @@
           logOutOption.className = "nav-item nav-link";
           logOutOption.onclick = function () {
             logOut();
+            logOutOption.remove();
+            const loginOption = document.createElement("a");
+            loginOption.href = "login.html";
+            loginOption.textContent = `Login`;
+            loginOption.className = "nav-item nav-link";
+            loginAnchor.append(loginOption);
+            if (!admin) {
+              let my = document.getElementById("my-vips");
+              my.remove();
+            } else {
+              let add = document.getElementById("add-pet");
+              let admPanel = document.getElementById("admin-panel");
+              add.remove();
+              admPanel.remove();
+            }
           };
           logOutOption.href = "#";
           loginAnchor.append(logOutOption);
+          if (!admin) {
+            const myPurcahses = document.createElement("a");
+            myPurcahses.textContent = `My\xa0VIPs`;
+            myPurcahses.className = "nav-item nav-link";
+            myPurcahses.href = "my_vips.html";
+            myPurcahses.id = "my-vips";
+            navbar.append(myPurcahses);
+          }
         }
       }
 
@@ -126,7 +160,6 @@
         const response = await fetch("/user_api/logout_user", options);
       }
     </script>
-
     <!--END NAVBAR-->
 
     <form action="/action_page.php">
