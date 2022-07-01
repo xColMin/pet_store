@@ -8,14 +8,6 @@ body {
   line-height: 23px;
 }
 
-/*
-#nav-jumbo {
-  background-color: rgb(197, 253, 230);
-  padding-top: 20%;
-  padding-bottom: 20%;
-}
-*/
-
 #nav-jumbo {
   padding-top: 20px;
   margin-top: 10px;
@@ -64,6 +56,14 @@ body {
 
 #catalog-cap {
   text-align: center;
+  font-family: cursive;
+  font-size: 30px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 23px;
+  color: rgb(0, 68, 255);
+  margin-bottom: 5px;
 }
 
 #catalog-btn {
@@ -111,6 +111,27 @@ label {
   text-align: center;
 }
 
+#catalog-jumbotron {
+  background-repeat: repeat;
+  background-image: url("../images/field.jpg");
+  background-blend-mode: screen;
+}
+
 #sold-lab {
   color: brown;
+}
+
+button {
+  background-color: rgb(40, 188, 247);
+}
+
+#about {
+  text-align: left;
+  font-size: 20px;
+  color: rgb(2, 29, 8);
+  font-weight: 500;
+}
+
+.jumbotron {
+  background-color: rgb(250, 253, 204);
 }
