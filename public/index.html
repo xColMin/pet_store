@@ -70,11 +70,13 @@
               addPet.href = "addPet.html";
               addPet.textContent = `Add\xa0Pet`;
               addPet.className = "nav-item nav-link";
+              addPet.id = "add-pet";
               navbar.append(addPet);
               const adminPanel = document.createElement("a");
               adminPanel.href = "adminPanel.html";
               adminPanel.textContent = `Admin\xa0Panel`;
               adminPanel.className = "nav-item nav-link";
+              adminPanel.id = "admin-panel";
               navbar.append(adminPanel);
             } else {
               break;
@@ -126,8 +128,15 @@
             loginOption.textContent = `Login`;
             loginOption.className = "nav-item nav-link";
             loginAnchor.append(loginOption);
-            let my = document.getElementById("my-vips");
-            my.remove();
+            if (!admin) {
+              let my = document.getElementById("my-vips");
+              my.remove();
+            } else {
+              let add = document.getElementById("add-pet");
+              let admPanel = document.getElementById("admin-panel");
+              add.remove();
+              admPanel.remove();
+            }
           };
           logOutOption.href = "#";
           loginAnchor.append(logOutOption);
