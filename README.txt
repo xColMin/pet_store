@@ -32,6 +32,10 @@ recorded into the database so that the admin can do accounting at the end of eac
 
 VIPets Project:
 
+To run the project just run: `node script.js`
+It is set to be running locally on port 3000
+
+
 Admin user information:
 
 Username: admin
