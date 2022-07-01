@@ -222,6 +222,7 @@
             cancel.data = item;
             cancel.onclick = function () {
               cancelOrder(cancel.data);
+              figure.remove();
             };
             const pending = document.createElement("label");
             pending.textContent = `Pending`;
