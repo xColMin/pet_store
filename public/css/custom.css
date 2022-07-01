@@ -12,6 +12,7 @@ body {
   padding-top: 20px;
   margin-top: 10px;
   padding-bottom: 0px;
+  margin-bottom: 40px;
   background-color: rgb(61, 226, 185);
 }
 
@@ -101,7 +102,7 @@ label {
 #vip-daily {
   text-align: center;
   background-color: rgb(61, 226, 185);
-  margin-top: 0px;
+  margin-top: 70px;
   margin-bottom: 0px;
   padding-top: 0px;
   padding-bottom: 0px;
@@ -134,4 +135,8 @@ button {
 
 .jumbotron {
   background-color: rgb(250, 253, 204);
+}
+
+#views {
+  margin-top: 15px;
 }
