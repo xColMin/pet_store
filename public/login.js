@@ -39,30 +39,3 @@ async function getInfo() {
       "User not found. Please Sign In");
   }
 }
-/*
-async function logUser(username) {
-  const response = await fetch("/user_api/log_user", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "accept": "application/json",
-    },
-    body: JSON.stringify({
-      "username": username,
-    }),
-  });
-  const data = response.json();
-}
-
-async function logoutUser(username) {
-  const response = await fetch("/user_api/logout_user", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      "username": username,
-    }),
-  });
-}
-*/

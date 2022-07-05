@@ -1,15 +1,3 @@
-// iterate over object json
-
-/*
-  var size = Object.keys(data).length;
-
-  for (let i = 0; i <= size; i++) {
-    console.log(data[i]);
-  }
-  */
-
-// ISS EXAMPLE
-
 async function getAvailablePets() {
   const response = await fetch("/pet_api");
   const data = await response.json();
@@ -31,8 +19,3 @@ async function getAvailablePets() {
   const jsonResponse = await fetch("/api", options);
   const jsonData = await jsonResponse.json();
 }
-
-/* 
-getAvailablePets().catch((error) => {
-  console.log(error);
-});*/
